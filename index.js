@@ -3,7 +3,7 @@ const createCsvWriter = require("csv-writer").createArrayCsvWriter;
 const fs = require("fs");
 
 const csvWriter = createCsvWriter({
-  header: ["NAME", "CATEGORY", "PHOTOURL", "RATING"],
+  header: ["NAME", "CATEGORY", "PHOTOURL"],
   path: "file.csv",
 });
 
@@ -50,15 +50,9 @@ const csvWriter = createCsvWriter({
       options3.push("IEM");
     }
   });
-  const options4 = await page.$$eval(
-    "div.sf__pcard-content.text-left.relative > div > div.max-w-full.w-full > div.sf-pcard__reviews > div",
-    (options4) => {
-      return options4.map((option4) => option4.getAttribute("data-rate"));
-    }
-  );
   const records = []
   await options.forEach((e,i)=>{
-    records.push([e, options3[i], options2[i], options4[i]])
+    records.push([e, options3[i], options2[i]])
   })
   await csvWriter
     .writeRecords(records) // returns a promise

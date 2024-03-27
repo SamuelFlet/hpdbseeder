@@ -5,7 +5,7 @@ const fastcsv = require("fast-csv");
 const connectionString =
   "postgresql://samuel:lE7JnRxBeZovnna3M-KhLA@carddb-6795.g8z.gcp-us-east1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full";
 
-let stream = fs.createReadStream("file.csv");
+let stream = fs.createReadStream("revsfile.csv");
 let csvData = [];
 let csvStream = fastcsv
   .parse()
@@ -22,7 +22,7 @@ let csvStream = fastcsv
     });
 
     const query =
-      `INSERT INTO public."Product" (NAME, CATEGORY, PHOTO) VALUES ($1, $2, $3)`;
+      `INSERT INTO public."Review" (TITLE,CONTENT,RATING,postedbyid,PRODUCTID) VALUES ($1, $2, $3, $4, $5)`;
 
     pool.connect((err, client, done) => {
       if (err) throw err;

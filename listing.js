@@ -34,7 +34,7 @@ titles.forEach((e) => {
     Math.floor(Math.random() * 1000) + 0.99,
     random(images),
     1,
-    Math.floor(Math.random() * 25),
+    Math.floor(Math.random() * (48 - 25 + 1) + 25),
   ]);
 });
 
